@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Wishlist
+{% endblock %}
+
+{% block wishlist_active %}
+    active
+{% endblock %}
+
+{% block content %}
+    <h1>Wishlist</h1>
+    <hr>
+
+    {% if wishlist %}
+        <div class="row">
+            {% for item in products %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <a href="{% url 'products:product_detail' item.id %}">
+                            <img class="card-img-top" src="{{ item.image.url }}" alt="{{ item.product.name }}">
+                        </a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="{% url 'products:product_detail' item.id %}">{{ item.name }}</a>
+                            </h4>
+                            <h5>{{ item.price }}</h5>
+                            <p class="card-text">{{ item.description|truncatewords:15 }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <form method="post" action="{% url 'app:remove_from_wishlist' item.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-danger">Remove from wishlist</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Your wishlist is currently empty.</p>
+    {% endif %}
+
+{% endblock %}
+

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ category.name }} | Fashion Marketplace
+{% endblock %}
+
+{% block category_active %}
+    active
+{% endblock %}
+
+{% block content %}
+    <h1>{{ category.name }}</h1>
+
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        {% for product in products %}
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">{{ product.price }}</small>
+                    <a href="{% url 'products:product' product.slug %}" class="btn btn-primary">View Product</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col">
+            <p>No products found in this category.</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+

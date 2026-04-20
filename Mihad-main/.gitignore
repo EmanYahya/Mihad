@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+myenv/
+env/
+.Python
+
+# Ignore pipenv virtual environment
+/.venv
+
+# Django
+*.log
+db.sqlite3
+/media/
+/static/
+
+# Docker
+docker-compose.yaml
+Dockerfile
+docker-compose.override.yml
+*.dockerignore
+
+# Ignore VSCode settings
+.vscode/
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore pytest cache
+__pycache__/
+.cpytest/
+
+# Ignore local development settings
+.env

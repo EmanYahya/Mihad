@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Products</h1>
+<div class="row">
+    {% for product in products %}
+
+    <div class="col-md-3">
+        <div class="card mb-3 box-shadow">
+            <div class="badge">Hot</div>
+            <div class="product-tumb">
+                <img src="{{ product.image.url }}" alt="">
+            </div>
+            <div class="product-details">
+                <span class="product-catagory">{{ product.category }}</span>
+                <h4><a href="{% url 'products:product_detail' product.id %}">{{ product.name }}</a></h4>
+                <p>{{ product.description }}</p>
+                <div class="product-bottom-details">
+                    <div class="product-price">{{ product.price }} <small>Birr</small></div>
+                    <div class="product-links">
+                        <button class="wishlist-btn {% if product in user.wishlist.products.all %}added{% endif %}"
+                                data-product-id="{{ product.id }}"
+                                data-action="{% if product in user.wishlist.products.all %}remove{% else %}add{% endif %}">
+                            <i class="fa {% if product in user.wishlist.products.all %}fa-heart{% else %}fa-heart-o{% endif %}"></i>
+                        </button>
+                        {% csrf_token %}
+                        <button class="cart-btn {% if product in user.wishlist.products.all %}added{% endif %}"
+                                data-product-id="{{ product.id }}"
+                                data-action="{% if product in user.wishlist.products.all %}remove{% else %}add{% endif %}">
+                            <i class="{% if product in user.wishlist.products.all %}fa fa-shopping-cart{% else %}far fa-shopping-cart{% endif %}"></i>
+                        </button>
+
+                        <!-- <button class="wishlist-btn" data-product-id="{{ product.id }}" data-action="add"></button>
+                            <a href=""><i class="fa fa-shopping-cart"></i></a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="card mb-4 shadow-sm">
+        <div class="heart-button-container">
+        <button class="heart-button {% if product.id in wishlist %}active{% endif %}" data-product-id="{{ product.id }}"><i class="fa fa-heart"></i></button>
+        </div>
+        <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}">
+        <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">{{ product.description }}</p>
+        <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+        <a href="{% url 'products:product_detail' product.id %}" class="btn btn-primary">View Product</a>
+        </div>
+        </div> -->
+        {% empty %}
+        <p>There are no products available.</p>
+        {% endfor %}
+</div>
+{% endblock %}
+

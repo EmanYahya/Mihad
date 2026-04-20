@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Upload a Product</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.name.label_tag }}
+                        {{ form.name }}
+                        {% if form.name.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.name.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.description.label_tag }}
+                        {{ form.description }}
+                        {% if form.description.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.description.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.price.label_tag }}
+                        {{ form.price }}
+                        {% if form.price.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.price.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.available_sizes.id_for_label }}">Available Sizes</label>
+                        <div class="d-flex flex-wrap">
+                            {% for checkbox in form.available_sizes %}
+                                <div class="form-check mr-3">
+                                    {{ checkbox }}
+                                    {{ checkbox.label_tag }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% if form.available_sizes.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.available_sizes.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.available_colors.id_for_label }}">Available Colors</label>
+                        <div class="d-flex flex-wrap">
+                            {% for checkbox in form.available_colors %}
+                                <div class="form-check mr-3">
+                                    {{ checkbox }}
+                                    {{ checkbox.label_tag }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% if form.available_colors.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.available_colors.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.category.label_tag }}
+                        {{ form.category }}
+                        {% if form.category.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.category.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.brand.label_tag }}
+                        {{ form.brand }}
+                        {% if form.brand.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.brand.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.image.label_tag }}
+                        {{ form.image }}
+                        {% if form.image.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.image.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-check mb-3">
+                        {{ form.is_featured }}
+                        {{ form.is_featured.label_tag }}
+                    </div>
+                    <div class="form-check mb-3">
+                        {{ form.is_newarrival }}
+                        {{ form.is_newarrival.label_tag }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.slug.label_tag }}
+                        {{ form.slug }}
+                        {% if form.slug.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.slug.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mt-4">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ category.name }}</h1>
+<form class="form-inline mb-3">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{ request.GET.q }}">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+<div class="row">
+    {% for product in products %}
+    <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+            <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}">
+            <div class="card-body">
+                <button class="wishlist-btn" data-product-id="123" data-action="add">
+                    <i class="fa fa-heart-o"></i><span>Add to Wishlist</span>
+                </button>
+
+                <h4 class="card-title">{{ product.name }}</h4>
+                <p class="card-text">{{ product.description }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a href="{% url 'products:product_detail' product.id %}" class="btn btn-sm btn-outline-secondary">View</a>
+                        {% if user.is_authenticated and product in user.wishlist.all %}
+                        <a href="{% url 'app:remove_from_wishlist' product.id %}" class="btn btn-sm btn-outline-danger">Remove from Wishlist</a>
+                        {% else %}
+                        <button class="btn btn-sm btn-outline-primary wishlist-btn" data-product-id="{{ product.id }}" data-action="add">
+                            <span>Add to Wishlist</span>
+                        </button>
+                        {% endif %}
+                    </div>
+                    <small class="text-muted">${{ product.price }}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-md-12">
+        <p>No products found.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+
