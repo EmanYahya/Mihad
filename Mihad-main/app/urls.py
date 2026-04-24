@@ -10,6 +10,7 @@ from .views.cart_view import *
 from .views.wishlist_view import *
 from .views.search_view import *
 from .views.account_view import *
+from app.views import cart_view
 
 
 app_name = 'app'
@@ -20,7 +21,7 @@ urlpatterns = [
     path('login/', login_view, name='login_view'),
     path('register/', register_view, name='register_view'),
     path('logout/', logout_view, name='logout_view'),
-    path('cart/', cart_detail, name='cart_detail'),
+    path('cart/', cart_view.cart_detail, name='cart_detail'),
     path('add-to-cart/<int:product_id>/', add_to_cart, name='add_to_cart'),
     path('remove-from-cart/<int:cart_item_id>/', remove_from_cart, name='remove_from_cart'),
     path('update-cart-item/<int:cart_item_id>/', update_cart_item, name='update_cart_item'),

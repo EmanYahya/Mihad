@@ -6,9 +6,9 @@ SECRET_KEY = 'bdu0600052'
 
 DEBUG = True
 
-<<<<<<< HEAD
+
 ALLOWED_HOSTS = ['Mihad.pythonanywhere.com']
-=======
+
 
 
 
