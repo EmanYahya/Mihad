@@ -1,18 +1,22 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from .views.api_views import get_products
 from .views.home_view import *
 from .views.category_view import *
 from .views.product_view import *
+from .views.cart_view import update_cart_item, cart_detail, remove_from_cart, add_to_cart, checkout
 from .views.cart_view import *
 from .views.wishlist_view import *
 from .views.search_view import *
 from .views.account_view import *
 
+
 app_name = 'app'
 
 urlpatterns = [
     path('search/', search, name='search'),
+    path('products/', get_products, name='get_products'),
     path('login/', login_view, name='login_view'),
     path('register/', register_view, name='register_view'),
     path('logout/', logout_view, name='logout_view'),
